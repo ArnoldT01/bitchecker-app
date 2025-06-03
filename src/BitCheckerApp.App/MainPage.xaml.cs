@@ -1,24 +1,28 @@
-﻿namespace BitCheckerApp.App
+﻿using System.Runtime.InteropServices;
+
+namespace BitCheckerApp.App
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+        private void OnCheckClicked(object sender, EventArgs e)
         {
-            count++;
+            var arch = RuntimeInformation.ProcessArchitecture;
+            string bitness = arch switch
+            {
+                Architecture.X64 or Architecture.Arm64 => "64-bit",
+                Architecture.X86 or Architecture.Arm => "32-bit",
+                _ => "Unknown"
+            };
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            architectureLabel.Text = $"Device is running: {bitness} ({arch})";
+            architectureLabel.IsVisible = true;
+            checkButton.IsVisible = false;
         }
+
     }
 }
