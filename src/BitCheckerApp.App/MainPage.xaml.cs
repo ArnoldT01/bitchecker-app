@@ -1,4 +1,10 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
+using Microsoft.Maui.Controls;
+
+#if ANDROID
+using Android.OS;
+#endif
 
 namespace BitCheckerApp.App
 {
@@ -11,6 +17,16 @@ namespace BitCheckerApp.App
 
         private void OnCheckClicked(object sender, EventArgs e)
         {
+            string message = "";
+
+#if ANDROID
+            // Get supported ABIs on Android
+            string[] supportedAbis = Build.SupportedAbis.ToArray();
+            string abiList = string.Join(", ", supportedAbis);
+            message += $"Supported ABIs: {abiList}\n";
+#endif
+
+            // Determine 32-bit or 64-bit from .NET architecture
             var arch = RuntimeInformation.ProcessArchitecture;
             string bitness = arch switch
             {
@@ -19,10 +35,11 @@ namespace BitCheckerApp.App
                 _ => "Unknown"
             };
 
-            architectureLabel.Text = $"Device is running: {bitness} ({arch})";
+            message += $"\n\nDevice is running: {bitness} ({arch})";
+
+            architectureLabel.Text = message;
             architectureLabel.IsVisible = true;
             checkButton.IsVisible = false;
         }
-
     }
 }

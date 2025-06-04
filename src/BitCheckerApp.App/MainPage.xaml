@@ -7,9 +7,9 @@
 
         <Label x:Name="architectureLabel"
                Text=""
-               FontSize="24"
+               FontSize="20"
                HorizontalOptions="Center"
-               IsVisible="False" />
+               IsVisible="False"/>
 
         <Button x:Name="checkButton"
                 Text="Check"
