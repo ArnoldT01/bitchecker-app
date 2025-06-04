@@ -1,6 +1,6 @@
-# BitCheckerApp – Device Architecture and ABI Inspector
+# BitCheckerApp â€“ Device Architecture and ABI Inspector
 
-## ?? What This App Does
+## What This App Does
 
 **BitCheckerApp** is a .NET MAUI application that:
 
@@ -10,15 +10,15 @@
 
 ---
 
-## ?? What Are "Bitness" and "ABI"?
+## What Are "Bitness" and "ABI"?
 
-### ?? Bitness (32-bit vs. 64-bit)
+### Bitness (32-bit vs. 64-bit)
 
 * This refers to how a device's processor and operating system handle memory addresses.
 * **32-bit** systems can address up to \~4GB of memory and use 32-bit wide registers.
 * **64-bit** systems can handle vastly larger amounts of memory and offer better performance in most modern apps.
 
-### ?? ABI (Application Binary Interface)
+### ABI (Application Binary Interface)
 
 * Defines how compiled native code interfaces with the system at runtime.
 * On Android, apps are often compiled for specific ABIs such as:
@@ -65,7 +65,7 @@
 
 ### **Windows**
 
-* Windows systems don’t expose an ABI list like Android.
+* Windows systems donâ€™t expose an ABI list like Android.
 * Typically a PC runs either a **64-bit** or **32-bit** version of Windows, depending on CPU and OS installation.
 * The app uses:
 
@@ -83,13 +83,13 @@
 
 | Platform | Bitness Detection | ABI List | Notes                                  |
 | -------- | ----------------- | -------- | -------------------------------------- |
-| Android  | ? Yes             | ? Yes    | Uses `Build.SupportedAbis`             |
-| iOS      | ? Yes             | ? No     | 64-bit only since iOS 11               |
-| Windows  | ? Yes             | ? No     | ABI concept doesn't apply the same way |
+| Android  | Yes             | Yes    | Uses `Build.SupportedAbis`             |
+| iOS      | Yes             | No     | 64-bit only since iOS 11               |
+| Windows  | Yes             | No     | ABI concept doesn't apply the same way |
 
 ---
 
-## ?? Files to Look At
+## Files to Look At
 
 * `MainPage.xaml`: UI with label and button
 * `MainPage.xaml.cs`: Handles logic to detect architecture and ABIs per platform using `#if` directives
