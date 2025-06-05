@@ -1,0 +1,35 @@
+name: Build and Publish .NET MAUI APP (CLI)
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+
+    - name: Cache NuGet packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: nuget-${{ runner.os }}-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          nuget-${{ runner.os }}-
+          
+    - name: Install .NET MAUI
+      run : dotnet workload install maui
+      
+    - name: Restore dependencies
+      run: dotnet restore src/BitCheckerApp.App/BitCheckerApp.App.csproj
+      
+    - name: Publish APK
+      run: dotnet publish src/BitCheckerApp.App/BitCheckerApp.App.csproj -c Release -p:PackageFormat=Apk -f net9.0-android --sc true
