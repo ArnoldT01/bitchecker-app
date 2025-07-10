@@ -93,3 +93,9 @@
 
 * `MainPage.xaml`: UI with label and button
 * `MainPage.xaml.cs`: Handles logic to detect architecture and ABIs per platform using `#if` directives
+
+## Preview
+<div style="display: flex;">
+  <img src="images/1752128393968.jpg" height="400px" alt="app preview"/>
+  <img src="images/1752128393982.jpg" height="400px" alt="app preview"/>
+</div>
